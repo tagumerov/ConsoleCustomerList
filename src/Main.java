@@ -39,7 +39,7 @@ public class Main
                     System.out.println(commandError);
                 }
             } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex){
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }

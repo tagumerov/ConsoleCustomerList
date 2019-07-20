@@ -14,6 +14,7 @@ public class CustomerStorage
     {
         String nameCheckRegExp = "^[А-ЯA-Z][а-яa-zА-ЯA-Z\\-]{0,}"; // RegExp для поиска Имени или Фамилии
         String phoneNumberRegExp = "^(\\+7|8)[0-9]{10}"; // RegExp для тел. номера
+        String emailCheckRegExp = "\\A[^@]+@([^@\\.]+\\.)+[^@\\.]+\\z"; // RegExp для почты
         String[] components = data.split("\\s+");
         if(components.length != 4)
             throw new IllegalArgumentException("Неправильный формат команды. Правильно: \n" +
@@ -24,7 +25,7 @@ public class CustomerStorage
             throw new IllegalArgumentException("Неправильно задан параметр Фамилия");
         if(!components[3].matches(phoneNumberRegExp)) // проверяем номер телефона
             throw new IllegalArgumentException("Неправильно задан номер телефона");
-        if(!components[2].contains("@")) // проверяем почтовый ящик
+        if(!components[2].matches(emailCheckRegExp)) // проверяем почтовый ящик
             throw new IllegalArgumentException("Неправильно задан e-mail");
         String name = components[0] + " " + components[1];
         storage.put(name, new Customer(name, components[3], components[2]));
