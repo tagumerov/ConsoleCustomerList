@@ -1,3 +1,4 @@
+package src;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -20,13 +21,17 @@ public class CustomerStorage
             throw new IllegalArgumentException("Неправильный формат команды. Правильно: \n" +
                     "add Василий Петров vasily.petrov@gmail.com +79215637722");
         if(!components[0].matches(nameCheckRegExp)) // проверяем формат имени
-            throw new IllegalArgumentException("Неправильно задан параметр Имя");
+            throw new IllegalArgumentException("Неправильно задан параметр Имя: " + components[0] +
+                    "\n Правильно: Василий");
         if(!components[1].matches(nameCheckRegExp)) // проверяем формат фамилии
-            throw new IllegalArgumentException("Неправильно задан параметр Фамилия");
+            throw new IllegalArgumentException("Неправильно задан параметр Фамилия: "  + components[1] +
+                    "\n Правильно: Петров");
         if(!components[3].matches(phoneNumberRegExp)) // проверяем номер телефона
-            throw new IllegalArgumentException("Неправильно задан номер телефона");
+            throw new IllegalArgumentException("Неправильно задан номер телефона: "  + components[3] +
+                    "\n Правильно: +79215637722 или 89215637722");
         if(!components[2].matches(emailCheckRegExp)) // проверяем почтовый ящик
-            throw new IllegalArgumentException("Неправильно задан e-mail");
+            throw new IllegalArgumentException("Неправильно задан e-mail: "  + components[2] +
+                    "\n Правильно: vasily.petrov@gmail.com");
         String name = components[0] + " " + components[1];
         storage.put(name, new Customer(name, components[3], components[2]));
     }
